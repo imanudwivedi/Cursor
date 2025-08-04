@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenAI Reward Bot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🎁 GenAI Reward Bot</h1>
+            <p>Your intelligent assistant for reward points management</p>
+        </header>
+
+        <!-- Login Section -->
+        <div id="loginSection" class="section">
+            <div class="card">
+                <h2>Welcome Back!</h2>
+                <p>Please enter your mobile number to access your reward information</p>
+                <form id="loginForm">
+                    <div class="input-group">
+                        <label for="mobileNumber">Mobile Number</label>
+                        <input type="tel" id="mobileNumber" name="mobileNumber" 
+                               placeholder="+91XXXXXXXXXX" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="btn-text">Login</span>
+                        <span class="loading" id="loginLoading">Loading...</span>
+                    </button>
+                </form>
+                <div id="loginError" class="error-message"></div>
+            </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboardSection" class="section hidden">
+            <div class="user-info">
+                <h2>Welcome, <span id="userName"></span>!</h2>
+                <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+            </div>
+
+            <!-- Chat Interface -->
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h3>💬 Ask about your rewards</h3>
+                    <p>Try asking: "How many reward points do I have?" or "When do my points expire?"</p>
+                </div>
+                
+                <div id="chatMessages" class="chat-messages">
+                    <div class="message bot-message">
+                        <div class="message-content">
+                            <strong>Reward Bot:</strong> Hi! I'm here to help you with your reward points. 
+                            What would you like to know?
+                        </div>
+                    </div>
+                </div>
+
+                <form id="chatForm" class="chat-input">
+                    <input type="text" id="chatInput" placeholder="Ask me about your rewards..." required>
+                    <button type="submit" class="btn btn-primary">
+                        <span id="sendBtnText">Send</span>
+                        <span id="sendLoading" class="loading hidden">...</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="askQuestion('How many reward points do I have?')">
+                        💰 Total Points
+                    </button>
+                    <button class="action-btn" onclick="askQuestion('When do my points expire?')">
+                        ⏰ Expiry Dates
+                    </button>
+                    <button class="action-btn" onclick="askQuestion('Show me cashback options')">
+                        💳 Cashback Options
+                    </button>
+                    <button class="action-btn" onclick="askQuestion('What can I get for 5000 points?')">
+                        🎁 Redemption Options
+                    </button>
+                </div>
+            </div>
+
+            <!-- Cards Summary -->
+            <div id="cardsSummary" class="cards-summary">
+                <h3>Your Cards</h3>
+                <div id="cardsContainer" class="cards-container">
+                    <!-- Cards will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+        <p>Processing your request...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
