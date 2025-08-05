@@ -16,13 +16,6 @@
     <description>GenAI microservice with OpenAI integration for natural language processing</description>
 
     <dependencies>
-        <!-- Common module -->
-        <dependency>
-            <groupId>com.genai.rewardbot</groupId>
-            <artifactId>common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
         <!-- Spring Boot Starters -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

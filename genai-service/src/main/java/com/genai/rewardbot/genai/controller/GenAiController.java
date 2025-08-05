@@ -1,6 +1,5 @@
 package com.genai.rewardbot.genai.controller;
 
-import com.genai.rewardbot.common.dto.GenAiQueryDto;
 import com.genai.rewardbot.genai.service.GenAiProcessingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
