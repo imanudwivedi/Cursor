@@ -1,0 +1,106 @@
+<div class="login-container">
+  <!-- Background gradient -->
+  <div class="background-gradient"></div>
+  
+  <!-- Login card -->
+  <div class="login-card">
+    
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">
+        <mat-icon class="logo-icon">card_giftcard</mat-icon>
+      </div>
+      <h1 class="title">RewardBot</h1>
+      <p class="subtitle">Your AI-powered rewards assistant</p>
+    </div>
+
+    <!-- Mobile Number Form -->
+    <div class="form-section" *ngIf="!showVerification">
+      <form [formGroup]="mobileForm" (ngSubmit)="onMobileSubmit()">
+        
+        <div class="input-group">
+          <mat-icon class="input-icon">phone</mat-icon>
+          <label for="mobileNumber">Mobile Number</label>
+          <mat-form-field appearance="outline" class="mobile-input">
+            <input matInput 
+                   formControlName="mobileNumber"
+                   placeholder="+1 5551234567"
+                   type="tel">
+            <mat-error *ngIf="mobileForm.get('mobileNumber')?.hasError('required')">
+              Mobile number is required
+            </mat-error>
+            <mat-error *ngIf="mobileForm.get('mobileNumber')?.hasError('pattern')">
+              Please enter a valid mobile number
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <button mat-raised-button 
+                color="primary" 
+                type="submit"
+                class="submit-btn"
+                [disabled]="!mobileForm.valid || isLoading">
+          <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
+          <span *ngIf="!isLoading">Send Verification Code</span>
+          <span *ngIf="isLoading">Sending...</span>
+        </button>
+
+      </form>
+    </div>
+
+    <!-- Verification Code Form -->
+    <div class="form-section" *ngIf="showVerification">
+      <form [formGroup]="verificationForm" (ngSubmit)="onVerificationSubmit()">
+        
+        <div class="verification-header">
+          <button mat-icon-button (click)="onBackToMobile()" class="back-btn">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <div class="verification-info">
+            <p class="sent-to">Code sent to</p>
+            <p class="mobile-display">{{ mobileNumber }}</p>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="verificationCode">Verification Code</label>
+          <mat-form-field appearance="outline" class="verification-input">
+            <input matInput 
+                   formControlName="verificationCode"
+                   placeholder="Enter 6-digit code"
+                   maxlength="6"
+                   type="text">
+            <mat-error *ngIf="verificationForm.get('verificationCode')?.hasError('required')">
+              Verification code is required
+            </mat-error>
+            <mat-error *ngIf="verificationForm.get('verificationCode')?.hasError('minlength')">
+              Code must be 6 digits
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="demo-helper">
+          <p class="demo-text">Demo: Use <strong>123456</strong></p>
+          <button mat-stroked-button 
+                  type="button"
+                  (click)="fillDemoCode()"
+                  class="demo-btn">
+            Fill Demo Code
+          </button>
+        </div>
+
+        <button mat-raised-button 
+                color="primary" 
+                type="submit"
+                class="submit-btn"
+                [disabled]="!verificationForm.valid || isLoading">
+          <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
+          <span *ngIf="!isLoading">Verify & Login</span>
+          <span *ngIf="isLoading">Verifying...</span>
+        </button>
+
+      </form>
+    </div>
+
+  </div>
+</div> 

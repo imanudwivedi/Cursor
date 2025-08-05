@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spending Analytics - Reward Bot</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="#" class="back-btn" onclick="goToDashboard()">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Dashboard
+                </a>
+                <h1 class="page-title">Spending Analytics</h1>
+            </div>
+            <div class="header-right">
+                <button class="settings-btn">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <div class="user-avatar">
+                    <span id="userInitials">AJ</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Metrics Cards -->
+        <div class="metrics-grid">
+            <div class="metric-card earned">
+                <div class="metric-icon">
+                    <i class="fas fa-arrow-up"></i>
+                </div>
+                <div class="metric-content">
+                    <h3>Total Earned</h3>
+                    <div class="metric-value" id="totalEarned">6,745</div>
+                    <div class="metric-label">lifetime points</div>
+                </div>
+            </div>
+
+            <div class="metric-card redeemed">
+                <div class="metric-icon">
+                    <i class="fas fa-arrow-down"></i>
+                </div>
+                <div class="metric-content">
+                    <h3>Total Redeemed</h3>
+                    <div class="metric-value" id="totalRedeemed">1,800</div>
+                    <div class="metric-label">lifetime points</div>
+                </div>
+            </div>
+
+            <div class="metric-card this-month">
+                <div class="metric-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="metric-content">
+                    <h3>This Month</h3>
+                    <div class="metric-value" id="thisMonth">0</div>
+                    <div class="metric-label">points earned</div>
+                </div>
+            </div>
+
+            <div class="metric-card transactions">
+                <div class="metric-icon">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <div class="metric-content">
+                    <h3>Transactions</h3>
+                    <div class="metric-value" id="totalTransactions">30</div>
+                    <div class="metric-label">total transactions</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Tabs -->
+        <div class="analytics-section">
+            <div class="tab-navigation">
+                <button class="tab-btn active" data-tab="overview">Overview</button>
+                <button class="tab-btn" data-tab="categories">Categories</button>
+                <button class="tab-btn" data-tab="trends">Trends</button>
+            </div>
+
+            <!-- Overview Tab Content -->
+            <div class="tab-content active" id="overview">
+                <div class="chart-section">
+                    <h3>Monthly Points Activity</h3>
+                    <div class="chart-container">
+                        <canvas id="monthlyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories Tab Content -->
+            <div class="tab-content" id="categories">
+                <div class="categories-grid">
+                    <div class="category-item">
+                        <div class="category-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="category-info">
+                            <h4>Shopping</h4>
+                            <div class="category-points">2,450 points</div>
+                            <div class="category-percentage">36%</div>
+                        </div>
+                    </div>
+                    <div class="category-item">
+                        <div class="category-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div class="category-info">
+                            <h4>Dining</h4>
+                            <div class="category-points">1,890 points</div>
+                            <div class="category-percentage">28%</div>
+                        </div>
+                    </div>
+                    <div class="category-item">
+                        <div class="category-icon">
+                            <i class="fas fa-gas-pump"></i>
+                        </div>
+                        <div class="category-info">
+                            <h4>Fuel</h4>
+                            <div class="category-points">1,205 points</div>
+                            <div class="category-percentage">18%</div>
+                        </div>
+                    </div>
+                    <div class="category-item">
+                        <div class="category-icon">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <div class="category-info">
+                            <h4>Entertainment</h4>
+                            <div class="category-points">1,200 points</div>
+                            <div class="category-percentage">18%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trends Tab Content -->
+            <div class="tab-content" id="trends">
+                <div class="trends-section">
+                    <div class="trend-item">
+                        <h4>Best Earning Month</h4>
+                        <div class="trend-value">March 2024</div>
+                        <div class="trend-detail">1,290 points earned</div>
+                    </div>
+                    <div class="trend-item">
+                        <h4>Average Monthly Earn</h4>
+                        <div class="trend-value">1,124 points</div>
+                        <div class="trend-detail">Based on last 6 months</div>
+                    </div>
+                    <div class="trend-item">
+                        <h4>Top Category</h4>
+                        <div class="trend-value">Shopping</div>
+                        <div class="trend-detail">36% of total earnings</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Your Cards Section -->
+        <div class="cards-section">
+            <h2>Your Cards</h2>
+            <div class="cards-grid" id="cardsContainer">
+                <!-- Cards will be loaded dynamically -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+        <p>Loading your analytics...</p>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html> 

@@ -433,4 +433,9 @@ function formatCurrency(amount) {
         style: 'currency',
         currency: 'INR'
     }).format(amount);
+}
+
+// Navigation to analytics dashboard
+function openAnalytics() {
+    window.location.href = 'dashboard.html';
 } 
